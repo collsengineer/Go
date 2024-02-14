@@ -16,32 +16,33 @@ import (
 
 func main() {
 	// Modify seqLength to increase or decrease the Fib. sequence
-	var seqLength int
+	var seqLenght int
 	fmt.Print("Sequence's length: ")
-	fmt.Scanln(&seqLength)
+	fmt.Scanln(&seqLenght)
 
-	// fibSequence: Slice to store regular Fibonacci sequence numbers.
-	fibSequence := []int{}
+	// Instantiating empty slice to store Fibonacci sequence
+	fibSeq := make([]int, seqLenght)
 
-	var totalSum int = 0
-
-	for i := 1; i <= seqLength; i++ {
-		fibSequence = append(fibSequence, FibonacciRecursive(i))
+	// Completing Fibonacci sequence
+	for i := 1; i <= seqLenght; i++ {
+		fibSeq = append(fibSeq, fib(i))
 	}
 
-	for _, value := range fibSequence {
-		if value%2 == 0 {
-			totalSum += value
+	// Calculating the sum of even values
+	total := 0
+	for i := 0; i < len(fibSeq); i++ {
+		if fibSeq[i]%2 == 0 {
+			total += fibSeq[i]
 		}
 	}
 
-	fmt.Println("Total even-valued sum:", totalSum)
+	fmt.Printf("Sum of even Fibonacci values: %d\n", total)
 }
 
-func FibonacciRecursive(n int) int {
-	// Fibonacci sequence by recursive algorithm. Returns just the last value.
+// fib: calculates the nth Fibonacci number using recursion
+func fib(n int) int {
 	if n == 0 || n == 1 {
 		return 1
 	}
-	return FibonacciRecursive(n-1) + FibonacciRecursive(n-2)
+	return fib(n-1) + fib(n-2)
 }
